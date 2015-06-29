@@ -1,0 +1,31 @@
+{
+  "name": "fire-ui-kit",
+  "version": "0.0.1",
+  "description": "Editor Framework Fire UI Kit",
+  "author": "Firebox Technology",
+  "build": true,
+  "hosts": {
+    "editor-framework": "^0.3.10"
+  },
+  "main": "main.js",
+  "menus": {
+    "Developer/Fire-UI-Kit Preview": {
+      "message": "fire-ui-kit:open"
+    }
+  },
+  "widgets": {
+  },
+  "panels": {
+    "panel": {
+      "frame": "panel/panel.html",
+      "type": "dockable",
+      "title": "Fire UI Kit Preview",
+      "width": 800,
+      "height": 600,
+      "messages": [
+      ]
+    }
+  },
+  "tests": [
+  ]
+}
