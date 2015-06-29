@@ -1,0 +1,57 @@
+<link rel="import" href="packages://fire-ui-kit/widget/index.html">
+<link rel="import" href="preview-item.html">
+
+<dom-module id="fire-ui-kit-preview">
+    <style>
+        :host {
+            @apply(--layout-vertical);
+        }
+
+        .toolbar {
+            margin: 10px;
+        }
+
+        #view {
+            margin: 10px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    </style>
+
+    <template>
+        <div class="toolbar">
+            <select on-change="_onSelect">
+                <template is="dom-repeat" items="{{previewPages}}">
+                    <option value="{{item.value}}">{{item.name}}</option>
+                </template>
+            </select>
+        </div>
+        <div id="view" flex-1>
+            <!--fire-ui-kit widgets preview-->
+        </div>
+    </template>
+</dom-module>
+
+<script>
+Editor.registerPanel( 'fire-ui-kit.panel', {
+    is: 'fire-ui-kit-preview',
+
+    ready: function () {
+        // NOTE: add preview page here
+        this.previewPages = [
+            // { name: '<editor-button>', value: 'editor-button-preview' },
+        ];
+    },
+
+    _onSelect: function (event) {
+        var viewDOM = Polymer.dom(this.$.view);
+        viewDOM.removeChild(viewDOM.firstElementChild);
+
+        var selectEl = event.target.value;
+        var el = document.createElement(selectEl);
+        viewDOM.appendChild(el);
+    },
+
+});
+
+</script>
