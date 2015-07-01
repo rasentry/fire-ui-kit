@@ -1,6 +1,6 @@
 Editor.registerWidget( 'fire-vec2', {
     is: 'fire-vec2',
-    
+
     properties: {
         value: {
             type: Object,
@@ -15,10 +15,6 @@ Editor.registerWidget( 'fire-vec2', {
             value: false,
             observer: '_disabledChanged'
         },
-    },
-
-    ready: function () {
-        this._initFocusable(this);
     },
 
     _disabledChanged: function () {
