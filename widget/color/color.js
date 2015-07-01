@@ -12,7 +12,7 @@ Editor.registerWidget( 'fire-color', {
         color: {
             type: Object,
             value: function () {
-                return new Fire.color(12,33,255,0.5);
+                return new Fire.color(255,255,255,1);
             },
             observer: '_colorChanged'
         },
