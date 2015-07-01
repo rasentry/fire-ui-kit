@@ -13,12 +13,6 @@ Editor.registerWidget( 'fire-vec2', {
         disabled: {
             type: Boolean,
             value: false,
-            observer: '_disabledChanged'
         },
-    },
-
-    _disabledChanged: function () {
-        this.$.x.disabled = this.disabled;
-        this.$.y.disabled = this.disabled;
     },
 });
