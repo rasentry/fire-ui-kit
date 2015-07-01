@@ -1,0 +1,65 @@
+<dom-module id="fire-vec2-preview">
+    <style>
+        editor-input {
+            margin: 5px;
+            width: 200px;
+        }
+    </style>
+
+    <template>
+        <preview-item
+            header="fire-vec2"
+            desc=""
+        >
+            <fire-vec2></fire-vec2>
+        </preview-item>
+
+        <preview-item
+            header="fire-vec2 set value"
+            desc="Set value with 'new Fire.Vec2(x,y)'"
+        >
+            <fire-vec2  value="{{myValue1}}"></fire-vec2>
+        </preview-item>
+
+        <preview-item
+            header="editor-input[disabled]"
+            desc="Set attribute with 'disabled'"
+        >
+            <fire-vec2 value="{{myValue2}}" disabled></fire-vec2>
+        </preview-item>
+
+        <preview-item
+            header="fire-vec2 Event"
+            desc="listen event 'on-value-changed'"
+        >
+            <fire-vec2 on-value-changed="_onValueChanged"></fire-vec2>
+        </preview-item>
+    </template>
+</dom-module>
+
+<script>
+Polymer( {
+    is: 'fire-vec2-preview',
+
+    properties: {
+        myValue1: {
+            type: Object,
+            value: function () {
+                return new Fire.Vec2(1,2);
+            },
+        },
+
+        myValue2: {
+            type: Object,
+            value: function () {
+                return new Fire.Vec2(2,3);
+            },
+        },
+    },
+
+    _onValueChanged: function (event) {
+        Editor.log(event.target.value);
+    },
+});
+
+</script>

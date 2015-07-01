@@ -1,6 +1,7 @@
 <link rel="import" href="packages://fire-ui-kit/widget/index.html">
 <link rel="import" href="preview-item.html">
 
+<link rel="import" href="fire-vec2.html">
 <dom-module id="fire-ui-kit-preview">
     <style>
         :host {
@@ -27,7 +28,7 @@
             </select>
         </div>
         <div id="view" flex-1>
-            <!--fire-ui-kit widgets preview-->
+            <fire-vec2-preview></fire-vec2-preview>
         </div>
     </template>
 </dom-module>
@@ -39,7 +40,7 @@ Editor.registerPanel( 'fire-ui-kit.panel', {
     ready: function () {
         // NOTE: add preview page here
         this.previewPages = [
-            // { name: '<editor-button>', value: 'editor-button-preview' },
+            { name: '<fire-vec2-preview>', value: 'fire-vec2-preview' },
         ];
     },
 

@@ -14,6 +14,7 @@
     }
   },
   "widgets": {
+      "fire-vec2": "widget/fire-vec2/fire-vec2.html"
   },
   "panels": {
     "panel": {
@@ -27,5 +28,6 @@
     }
   },
   "tests": [
+      "test/fire-vec2.html"
   ]
 }
