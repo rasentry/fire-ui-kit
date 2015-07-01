@@ -1,11 +1,13 @@
+<link rel="import" href="packages://color-picker/widget/color-picker.html">
 <script type="text/javascript" src="app://bower_components/chroma.js/chroma.js"></script>
+
 <dom-module id="fire-color">
     <link rel="import" type="css" href="color.css">
 
     <template>
         <div class="border">
             <div class="rgb-wrapper">
-                <div id="previewRGB"></div>
+                <div id="previewRGB" on-click="_showColorPicker"></div>
                 <i id="iconDown" class="fa fa-caret-down"></i>
                 <div id="alpha"></div>
             </div>
