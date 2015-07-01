@@ -1,13 +1,6 @@
 Editor.registerWidget( 'fire-vec2', {
     is: 'fire-vec2',
-
-    behaviors: [EditorUI.focusable],
-
-    listeners: {
-        'focus': '_onFocus',
-        'blur': '_onBlur',
-    },
-
+    
     properties: {
         value: {
             type: Object,
