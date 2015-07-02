@@ -1,13 +1,6 @@
 Editor.registerWidget( 'fire-vec2', {
     is: 'fire-vec2',
 
-    behaviors: [EditorUI.focusable],
-
-    listeners: {
-        'focus': '_onFocus',
-        'blur': '_onBlur',
-    },
-
     properties: {
         value: {
             type: Object,
@@ -20,16 +13,6 @@ Editor.registerWidget( 'fire-vec2', {
         disabled: {
             type: Boolean,
             value: false,
-            observer: '_disabledChanged'
         },
-    },
-
-    ready: function () {
-        this._initFocusable(this);
-    },
-
-    _disabledChanged: function () {
-        this.$.x.disabled = this.disabled;
-        this.$.y.disabled = this.disabled;
     },
 });

@@ -4,22 +4,10 @@
     align-items: center;
 }
 
-.group {
-    display: flex;
-    margin: 0px 4px;
-}
-
-.tip {
-    position: absolute;
-    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-    z-index: 999;
-    pointer-events: none;
-
-    font-size: 9px;
-    transform: translate(-20px,50%);
-    color: #aaaaaa;
-}
-
 :host[disabled] {
-    pointer-events: 0.5;
+    pointer-events: none;
+}
+
+span.space {
+    width: 10px;
 }

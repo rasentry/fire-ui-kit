@@ -3,15 +3,9 @@
     <link rel="import" type="css" href="fire-vec2.css">
 
     <template>
-        <div class="group">
-            <editor-unit-input id="x" input-value="{{value.x}}"></editor-unit-input>
-            <span class="tip">X</span>
-        </div>
-
-        <div class="group">
-            <editor-unit-input id="y" input-value="{{value.y}}"></editor-unit-input>
-            <span class="tip">Y</span>
-        </div>
+        <editor-unit-input id="x" class="flex-1" disabled="{{disabled}}" input-value="{{value.x}}" hint="X"></editor-unit-input>
+        <span class="space"></span>
+        <editor-unit-input id="y" class="flex-1" disabled="{{disabled}}" input-value="{{value.y}}" hint="Y"></editor-unit-input>
     </template>
 
     <script type="text/javascript" src="fire-vec2.js"></script>
