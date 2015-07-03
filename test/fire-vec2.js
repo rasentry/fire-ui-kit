@@ -27,7 +27,6 @@ describe('<fire-vec2>', function() {
 
     it('can be disabled', function( done ) {
         vec2El.disabled = true;
-        expect(vec2El.hasAttribute('disabled')).to.be.eql(true);
         expect(vec2El.$.x.hasAttribute('disabled')).to.be.eql(true);
         expect(vec2El.$.y.hasAttribute('disabled')).to.be.eql(true);
         done();

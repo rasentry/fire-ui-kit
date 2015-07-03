@@ -20,7 +20,7 @@ describe('<fire-color>', function() {
     it('can be set value', function( done ) {
         colorEl.value = new Fire.color(1,1,1,0.8);
         expect(colorEl.value).to.be.eql(new Fire.color(1,1,1,0.8));
-        expect(colorEl.$.previewRGB.style.backgroundColor).to.be.eql('rgba(255, 255, 255, 0.8)');
+        expect(colorEl.$.previewRGB.style.backgroundColor).to.be.eql('rgb(255, 255, 255)');
         expect(colorEl.$.alpha.style.width).to.be.eql('80%');
         done();
     });
