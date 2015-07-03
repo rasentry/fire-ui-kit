@@ -14,17 +14,11 @@ Editor.registerWidget( 'fire-color', {
             value: function () {
                 return new Fire.Color(1,1,1,1);
             },
-            observer: '_colorChanged'
         },
     },
 
     ready: function () {
         this._initFocusable(this);
-    },
-
-    _colorChanged: function () {
-        // this.$.previewRGB.style.backgroundColor = chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0, this.value.a).css('rgba');
-        this.$.alpha.style.width = (this.value.a / 1) * 100 + '%';
     },
 
     _backgroundStyle: function (r, g, b) {
