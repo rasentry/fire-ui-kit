@@ -13,7 +13,7 @@ describe('<fire-color>', function() {
     });
 
     it('check default value', function( done ) {
-        expect(colorEl.value).to.be.eql(new Fire.color(0,0,0,1));
+        expect(colorEl.value).to.be.eql(new Fire.color(1,1,1,1));
         done();
     });
 

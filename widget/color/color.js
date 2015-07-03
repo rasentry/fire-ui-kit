@@ -12,7 +12,7 @@ Editor.registerWidget( 'fire-color', {
         value: {
             type: Object,
             value: function () {
-                return new Fire.color(0,0,0,1);
+                return new Fire.color(1,1,1,1);
             },
             observer: '_colorChanged'
         },
@@ -37,10 +37,16 @@ Editor.registerWidget( 'fire-color', {
         }.bind(this));
 
         this.colorPicker = document.createElement('color-picker');
-        this.colorPicker.setColor(this.value);
+        this.colorPicker.setColor({
+            r: this.value.r * 255|0,
+            g: this.value.g * 255|0,
+            b: this.value.b * 255|0,
+            a: this.value.a
+        });
 
-        this.colorPicker.addEventListener('color-changed',function (event) {
-            this.value = this.colorPicker.color;
+        this.colorPicker.addEventListener('value-changed',function (event) {
+            var value_ = event.target.value;
+            this.value = new Fire.color(value_.r/255,value_.g/255,value_.b/255,value_.a);
         }.bind(this));
         document.body.appendChild(this.colorPicker);
         this.updateColorPicker();
