@@ -22,11 +22,11 @@ Editor.registerWidget( 'fire-color', {
     },
 
     _backgroundStyle: function (r, g, b) {
-        return 'background-color:' + chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0).css('rgb');
+        return 'background-color:' + chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0).css('rgb') + ';';
     },
 
     _alphaStyle: function (a) {
-        return (a / 1) * 100 + '%';
+        return 'width:' + (a / 1) * 100 + '%;';
     },
 
     _showColorPicker: function () {
