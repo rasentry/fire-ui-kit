@@ -23,7 +23,7 @@ Editor.registerWidget( 'fire-color', {
     },
 
     _colorChanged: function () {
-        this.$.previewRGB.style.backgroundColor = chroma(this.value.r, this.value.g, this.value.b, this.value.a).css('rgba');
+        this.$.previewRGB.style.backgroundColor = chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0, this.value.a).css('rgba');
         this.$.alpha.style.width = (this.value.a / 1) * 100 + '%';
     },
 
@@ -37,14 +37,10 @@ Editor.registerWidget( 'fire-color', {
         }.bind(this));
 
         this.colorPicker = document.createElement('color-picker');
-        this.colorPicker.setColor({
-            r: this.value.r,
-            g: this.value.g,
-            b: this.value.b,
-            a: this.value.a
-        });
+        this.colorPicker.setColor(this.value);
+
         this.colorPicker.addEventListener('color-changed',function (event) {
-            this.value = new Fire.color(this.colorPicker.value.r,this.colorPicker.value.g,this.colorPicker.value.b,this.colorPicker.value.a);
+            this.value = this.colorPicker.color;
         }.bind(this));
         document.body.appendChild(this.colorPicker);
         this.updateColorPicker();
