@@ -17,7 +17,7 @@
             header="fire-color[disabled]"
             desc="set attribute with 'disabled'"
         >
-            <fire-color disabled></fire-color>
+            <fire-color id="disabled" disabled></fire-color>
         </preview-item>
     </template>
 </dom-module>
@@ -27,7 +27,11 @@ Polymer( {
     is: 'fire-color-preview',
 
     properties: {
-        
+
+    },
+
+    ready: function () {
+        this.$.disabled.value = new Fire.Color(255,0,0,0.5);
     },
 });
 
