@@ -65,14 +65,14 @@ Editor.registerWidget( 'fire-color', {
 
             var style = this.colorPicker.style;
             style.position = "fixed";
-            style.right = (bodyRect.right - elRect.right) + "px";
+            style.right = (bodyRect.right - elRect.right + 3) + "px";
             style.zIndex = 999;
 
             if ( document.body.clientHeight - elRect.bottom <= menuRect.height + 10 ) {
-                style.top = (elRect.top - bodyRect.top - menuRect.height - 5) + "px";
+                style.top = (elRect.top - bodyRect.top - menuRect.height - 10) + "px";
             }
             else {
-                style.top = (elRect.bottom - bodyRect.top + 5) + "px";
+                style.top = (elRect.bottom - bodyRect.top + 10) + "px";
             }
 
             this.updateColorPicker();
