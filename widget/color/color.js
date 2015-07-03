@@ -50,7 +50,7 @@ Editor.registerWidget( 'fire-color', {
             var value_ = event.target.value;
             this.value = new Fire.Color(value_.r/255,value_.g/255,value_.b/255,value_.a);
         }.bind(this));
-        document.body.appendChild(this.colorPicker);
+        this.appendChild(this.colorPicker);
         this.updateColorPicker();
     },
 
@@ -64,7 +64,7 @@ Editor.registerWidget( 'fire-color', {
             var menuRect = this.colorPicker.getBoundingClientRect();
 
             var style = this.colorPicker.style;
-            style.position = "absolute";
+            style.position = "fixed";
             style.right = (bodyRect.right - elRect.right) + "px";
             style.zIndex = 999;
 
