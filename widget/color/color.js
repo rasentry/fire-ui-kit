@@ -12,7 +12,7 @@ Editor.registerWidget( 'fire-color', {
         value: {
             type: Object,
             value: function () {
-                return new Fire.color(1,1,1,1);
+                return new Fire.Color(1,1,1,1);
             },
             observer: '_colorChanged'
         },
@@ -46,7 +46,7 @@ Editor.registerWidget( 'fire-color', {
 
         this.colorPicker.addEventListener('value-changed',function (event) {
             var value_ = event.target.value;
-            this.value = new Fire.color(value_.r/255,value_.g/255,value_.b/255,value_.a);
+            this.value = new Fire.Color(value_.r/255,value_.g/255,value_.b/255,value_.a);
         }.bind(this));
         document.body.appendChild(this.colorPicker);
         this.updateColorPicker();
