@@ -14,7 +14,7 @@
     }
   },
   "widgets": {
-      "fire-vec2": "widget/fire-vec2/fire-vec2.html",
+      "fire-vec2": "widget/vec2/vec2.html",
       "fire-color": "widget/color/color.html"
   },
   "panels": {
@@ -29,7 +29,7 @@
     }
   },
   "tests": [
-      "test/fire-vec2.html",
+      "test/vec2.html",
       "test/color.html"
   ]
 }
