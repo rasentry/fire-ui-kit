@@ -23,8 +23,16 @@ Editor.registerWidget( 'fire-color', {
     },
 
     _colorChanged: function () {
-        this.$.previewRGB.style.backgroundColor = chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0, this.value.a).css('rgba');
+        // this.$.previewRGB.style.backgroundColor = chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0, this.value.a).css('rgba');
         this.$.alpha.style.width = (this.value.a / 1) * 100 + '%';
+    },
+
+    _backgroundStyle: function (r, g, b) {
+        return 'background-color:' + chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0).css('rgb');
+    },
+
+    _alphaStyle: function (a) {
+        return (a / 1) * 100 + '%';
     },
 
     _showColorPicker: function () {

@@ -7,9 +7,9 @@
     <template>
         <div class="border">
             <div class="rgb-wrapper">
-                <div id="previewRGB" on-click="_showColorPicker"></div>
+                <div id="previewRGB" style$="{{_backgroundStyle(value.r,value.g,value.b)}}" on-click="_showColorPicker"></div>
                 <i id="iconDown" class="fa fa-caret-down"></i>
-                <div id="alpha"></div>
+                <div id="alpha" style$="{{_alphaStyle(value.a)}}"></div>
             </div>
         </div>
     </template>
