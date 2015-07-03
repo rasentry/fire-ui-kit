@@ -1,0 +1,34 @@
+<dom-module id="fire-color-preview">
+<style>
+    fire-color {
+        margin: 5px;
+        width: 200px;
+    }
+</style>
+    <template>
+        <preview-item
+            header="fire-color"
+            desc=""
+        >
+            <fire-color></fire-color>
+        </preview-item>
+
+        <preview-item
+            header="fire-color[disabled]"
+            desc="set attribute with 'disabled'"
+        >
+            <fire-color disabled></fire-color>
+        </preview-item>
+    </template>
+</dom-module>
+
+<script>
+Polymer( {
+    is: 'fire-color-preview',
+
+    properties: {
+
+    },
+});
+
+</script>

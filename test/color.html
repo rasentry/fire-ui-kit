@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>fire-color tests</title>
+        <meta charset="utf-8">
+        <link rel="import" href="packages://tester/env/env-widget.html">
+        <script type="text/javascript" src="app://bower_components/chroma.js/chroma.js"></script>
+        <script>
+            Editor.require('app://engine-framework');
+        </script>
+    </head>
+
+    <body>
+        <widget-fixture id="widget" src="packages://fire-ui-kit/widget/color/color.html">
+            <template>
+                <fire-color></fire-color>
+            </template>
+        </widget-fixture>
+
+        <widget-fixture id="bind-to-object" src="packages://fire-ui-kit/widget/color/color.html">
+            <template>
+                <template is="dom-bind">
+                    <fire-color value="{{foo}}" id="color"></fire-color>
+                </template>
+            </template>
+        </widget-fixture>
+        <script src="color.js"></script>
+    </body>
+
+</html>
