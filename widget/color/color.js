@@ -6,6 +6,7 @@ Editor.registerWidget( 'fire-color', {
     listeners: {
         'focus': '_onFocus',
         'blur': '_onBlur',
+        'focusin': '_onFocusIn',
     },
 
     properties: {
@@ -14,6 +15,7 @@ Editor.registerWidget( 'fire-color', {
             value: function () {
                 return new Fire.Color(1,1,1,1);
             },
+            notify: true,
         },
     },
 
@@ -29,53 +31,62 @@ Editor.registerWidget( 'fire-color', {
         return 'width:' + (a / 1) * 100 + '%;';
     },
 
-    _showColorPicker: function () {
+    _onColorClick: function ( event ) {
+        event.stopPropagation();
+
         EditorUI.addHitGhost('cursor', '998', function () {
-            if (this.colorPicker) {
-                this.colorPicker.close();
-                this.colorPicker = null;
+            if (this._colorPicker) {
+                Polymer.dom(this).removeChild(this._colorPicker);
+                this._colorPicker = null;
             }
             EditorUI.removeHitGhost();
         }.bind(this));
 
-        this.colorPicker = document.createElement('color-picker');
-        this.colorPicker.setColor({
+        this._colorPicker = document.createElement('color-picker');
+        this._colorPicker.setColor({
             r: this.value.r * 255|0,
             g: this.value.g * 255|0,
             b: this.value.b * 255|0,
             a: this.value.a
         });
-
-        this.colorPicker.addEventListener('value-changed',function (event) {
+        this._colorPicker.addEventListener( 'value-changed', function (event) {
             var value_ = event.target.value;
-            this.value = new Fire.Color(value_.r/255,value_.g/255,value_.b/255,value_.a);
+            this.value = new Fire.Color(value_.r/255,
+                                        value_.g/255,
+                                        value_.b/255,
+                                        value_.a);
         }.bind(this));
-        this.appendChild(this.colorPicker);
-        this.updateColorPicker();
+
+        Polymer.dom(this).appendChild(this._colorPicker);
+        this._updateColorPicker();
     },
 
-    updateColorPicker: function () {
+    _updateColorPicker: function () {
         window.requestAnimationFrame ( function () {
-            if ( !this.colorPicker)
+            if ( !this._colorPicker)
                 return;
 
             var bodyRect = document.body.getBoundingClientRect();
             var elRect = this.getBoundingClientRect();
-            var menuRect = this.colorPicker.getBoundingClientRect();
+            var colorPickerRect = this._colorPicker.getBoundingClientRect();
 
-            var style = this.colorPicker.style;
-            style.position = "fixed";
-            style.right = (bodyRect.right - elRect.right) + "px";
+            var style = this._colorPicker.style;
+            style.position = 'fixed';
+            style.left = (elRect.right - colorPickerRect.width) + 'px';
             style.zIndex = 999;
 
-            if ( document.body.clientHeight - elRect.bottom <= menuRect.height + 10 ) {
-                style.top = (elRect.top - bodyRect.top - menuRect.height - 5) + "px";
+            if ( document.body.clientHeight - elRect.bottom <= colorPickerRect.height + 10 ) {
+                style.top = (elRect.top - bodyRect.top - colorPickerRect.height - 10) + 'px';
             }
             else {
-                style.top = (elRect.bottom - bodyRect.top + 5) + "px";
+                style.top = (elRect.bottom - bodyRect.top + 10) + 'px';
             }
 
-            this.updateColorPicker();
+            this._updateColorPicker();
         }.bind(this) );
+    },
+
+    _onFocusIn: function ( event ) {
+        this._setFocused(true);
     },
 });

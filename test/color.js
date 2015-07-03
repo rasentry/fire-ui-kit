@@ -27,8 +27,7 @@ describe('<fire-color>', function() {
 
     it('can be popup color-picker', function( done ) {
         Tester.click(colorEl.$.previewRGB);
-        var colorPicker = document.getElementsByTagName('color-picker');
-        expect(colorPicker.length > 0).to.be.eql(true);
+        expect(colorEl._colorPicker).to.not.equal(undefined);
         done();
     });
 
