@@ -9,7 +9,7 @@
   },
   "main": "main.js",
   "menus": {
-    "Developer/Fire-UI-Kit Preview": {
+    "Developer/UI Preview/fire-ui-kit": {
       "message": "fire-ui-kit:open"
     }
   },
