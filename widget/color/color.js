@@ -83,17 +83,22 @@ Editor.registerWidget( 'fire-color', {
             var value_ = event.target.value;
 
             var newValue;
-            if ( this.value.clone ) {
-                newValue = this.value.clone();
+            if ( this.value instanceof Fire.Color ) {
+                newValue = new Fire.Color({
+                    r: value_.r/255,
+                    g: value_.g/255,
+                    b: value_.b/255,
+                    a: value_.a,
+                });
             }
             else {
-                newValue = {};
+                newValue = {
+                    r: value_.r/255,
+                    g: value_.g/255,
+                    b: value_.b/255,
+                    a: value_.a,
+                };
             }
-
-            newValue.r = value_.r/255;
-            newValue.g = value_.g/255;
-            newValue.b = value_.b/255;
-            newValue.a = value_.a;
 
             this.set( 'value', newValue );
         }.bind(this));
