@@ -5,7 +5,7 @@ Editor.registerWidget( 'fire-vec2', {
         value: {
             type: Object,
             value: function () {
-                return new Fire.Vec2(0,0);
+                return { x: 0, y: 0 };
             },
             notify: true,
         },

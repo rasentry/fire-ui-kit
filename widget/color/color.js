@@ -14,7 +14,7 @@ Editor.registerWidget( 'fire-color', {
         value: {
             type: Object,
             value: function () {
-                return new Fire.Color(1,1,1,1);
+                return { r:1, g:1, b:1, a:1 };
             },
             notify: true,
         },
@@ -81,10 +81,21 @@ Editor.registerWidget( 'fire-color', {
         });
         this._colorPicker.addEventListener( 'value-changed', function (event) {
             var value_ = event.target.value;
-            this.value = new Fire.Color(value_.r/255,
-                                        value_.g/255,
-                                        value_.b/255,
-                                        value_.a);
+
+            var newValue;
+            if ( this.value.clone ) {
+                newValue = this.value.clone();
+            }
+            else {
+                newValue = {};
+            }
+
+            newValue.r = value_.r/255;
+            newValue.g = value_.g/255;
+            newValue.b = value_.b/255;
+            newValue.a = value_.a;
+
+            this.set( 'value', newValue );
         }.bind(this));
 
         Polymer.dom(this).appendChild(this._colorPicker);
