@@ -5,14 +5,15 @@
     <link rel="import" type="css" href="color.css">
 
     <template>
-        <div class="border">
+        <div class="border" on-click="_onColorClick">
             <div class="rgb-wrapper">
-                <div id="previewRGB" style$="{{_backgroundStyle(value.r,value.g,value.b)}}" on-click="_showColorPicker"></div>
+                <div id="previewRGB" style$="{{_backgroundStyle(value.r,value.g,value.b)}}"></div>
                 <i id="iconDown" class="fa fa-caret-down"></i>
                 <div id="alpha" style$="{{_alphaStyle(value.a)}}"></div>
             </div>
             <div class="mask fit"></div>
         </div>
+        <content></content>
     </template>
 
     <script type="text/javascript" src="color.js"></script>
