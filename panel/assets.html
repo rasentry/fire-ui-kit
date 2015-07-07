@@ -1,0 +1,39 @@
+<dom-module id="fire-assets-preview">
+<style>
+    fire-assets {
+        margin: 5px;
+        width: 200px;
+    }
+</style>
+    <template>
+        <preview-item
+            header="fire-assets"
+            desc=""
+        >
+            <fire-assets on-browse="_browse"></fire-assets>
+        </preview-item>
+
+        <preview-item
+            header="fire-assets[disabled]"
+            desc=""
+        >
+            <fire-assets on-browse="_browse" disabled></fire-assets>
+        </preview-item>
+
+    </template>
+</dom-module>
+
+<script>
+Polymer( {
+    is: 'fire-assets-preview',
+
+    properties: {
+
+    },
+
+    _browse: function () {
+        console.log('browse');
+    },
+});
+
+</script>

@@ -1,0 +1,19 @@
+<dom-module id="fire-assets">
+    <link rel="import" type="css" href="assets.css">
+
+    <template>
+        <div id="dropArea" class="dropArea" on-dragover="_dragOver" on-drop="_dropDone" on-dragleave="_dragLeave">
+            <div class="border">
+                <div class="fit content">
+                    <div class$="[[_isNullClass(value)]]">[[_isNullText(value)]]</div>
+                    <span class="type">[[type]]</span>
+                </div>
+            </div>
+        </div>
+        <div class="icon" on-click="_browseClick">
+            <i class="fa fa-share-square-o"></i>
+        </div>
+    </template>
+
+    <script type="text/javascript" src="assets.js"></script>
+</dom-module>
