@@ -1,5 +1,5 @@
-Editor.registerWidget( 'fire-assets', {
-    is: 'fire-assets',
+Editor.registerWidget( 'fire-asset', {
+    is: 'fire-asset',
 
     behaviors: [EditorUI.focusable],
 
@@ -16,7 +16,7 @@ Editor.registerWidget( 'fire-assets', {
 
         type: {
             type: String,
-            value: 'Fire.Assets'
+            value: 'Fire.asset'
         },
 
         highlighted: {
