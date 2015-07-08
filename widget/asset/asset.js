@@ -1,11 +1,18 @@
 Editor.registerWidget( 'fire-asset', {
     is: 'fire-asset',
 
-    behaviors: [EditorUI.focusable],
+    behaviors: [EditorUI.focusable,EditorUI.droppable],
+
+    hostAttributes: {
+        'droppable': 'asset',
+    },
 
     listeners: {
         'focus': '_onFocus',
         'blur': '_onBlur',
+        'drop-area-enter': '_onDropAreaEnter',
+        'drop-area-leave': '_onDropAreaLeave',
+        'drop-area-accept': '_onDropAreaAccept',
     },
 
     properties: {
@@ -34,27 +41,32 @@ Editor.registerWidget( 'fire-asset', {
 
     ready: function () {
         this._initFocusable(this);
+        this._initDroppable(this.$.dropArea);
     },
 
-    _dragOver: function (event) {
+    _onDragOver: function (event) {
         event.stopPropagation();
 
         this.highlighted = true;
         this.invalid = true;
     },
 
-    _dragLeave: function (event) {
+    _onDropAreaLeave: function (event) {
         event.stopPropagation();
 
         this.highlighted = false;
         this.invalid = false;
     },
 
-    _dropDone: function (event) {
+    _onDropAreaEnter: function (event) {
         event.stopPropagation();
-
+        
         this.highlighted = false;
         this.invalid = false;
+    },
+
+    _onDropAreaAccept: function (event) {
+        event.stopPropagation();
     },
 
     _isNullClass: function (value) {
