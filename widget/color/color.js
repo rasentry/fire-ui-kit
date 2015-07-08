@@ -113,6 +113,7 @@ Editor.registerWidget( 'fire-color', {
             this._colorPicker = null;
         }
         EditorUI.removeHitGhost();
+        this.focus();
     },
 
     _onFocusIn: function ( event ) {
