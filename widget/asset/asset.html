@@ -7,13 +7,13 @@
                     >
 
             <div class="border">
-                <div class="fit content">
-                    <div class$="[[_isNullClass(value)]]">[[_isNullText(value)]]</div>
+                <div class="fit content layout horizontal">
+                    <div class$="{{_assetClass(value)}}">[[_assetName]]</div>
                     <span class="type">[[type]]</span>
                 </div>
             </div>
         </div>
-        <div class="icon" on-click="_browseClick">
+        <div class="icon" on-click="_onBrowseClick">
             <i class="fa fa-dot-circle-o"></i>
         </div>
     </template>

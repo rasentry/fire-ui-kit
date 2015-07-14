@@ -58,26 +58,27 @@
 
 }
 
-.text {
+.name {
     display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-.null {
-    display: inline-block;
+.name.null {
     color: #525252;
 }
 
 .type {
-    font-size: 10px;
+    font-size: 12px;
     color: #C8A002;
 }
 
 .type::before {
-    content: "(";
+    content: "[";
 }
 
 .type::after {
-    content: ")";
+    content: "]";
 }
 
 :host[focused] .dropArea{
@@ -93,12 +94,12 @@
     border: 1px solid #06c90e;
 }
 
-:host[invalid] .dropArea {
+:host[highlighted][invalid] .dropArea {
     background: rgba(167, 11, 11, 0.5);
     border: 1px solid #d02323;
 }
 
-:host[invalid] .content {
+:host[highlighted][invalid] .content {
     border: 1px solid #d02323;
 }
 
