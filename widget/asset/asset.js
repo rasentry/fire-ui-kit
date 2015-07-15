@@ -76,7 +76,7 @@ Editor.registerWidget( 'fire-asset', {
 
     _onClick: function ( event ) {
         event.stopPropagation();
-        Editor.sendToWindows('editor:hint-asset', this.value);
+        Editor.sendToAll('editor:hint', this.value);
     },
 
     _onDropAreaEnter: function (event) {
@@ -128,11 +128,16 @@ Editor.registerWidget( 'fire-asset', {
             return;
         }
 
-        Editor.assetdb.queryInfoByUuid( this.value, function ( info ) {
+        Editor.assetdb.queryUrlByUuid( this.value, function ( url ) {
             var Url = require('fire-url');
-            this.type = info['meta-type'];
-            this._assetName = Url.basenameNoExt(info.url);
+            this._assetName = Url.basenameNoExt(url);
         }.bind(this));
+    },
+
+    _onEmptyClick: function (event) {
+        event.stopPropagation();
+
+        this.set( 'value', '' );
     },
 
     _onBrowseClick: function (event) {

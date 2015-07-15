@@ -3,15 +3,17 @@
 
     <template>
         <div id="dropArea" class="dropArea"
-                    on-dragover="_onDragOver"
-                    >
-
+            on-dragover="_onDragOver"
+        >
             <div class="border">
                 <div class="fit content layout horizontal">
                     <div class$="{{_assetClass(value)}}">[[_assetName]]</div>
                     <span class="type">[[type]]</span>
                 </div>
             </div>
+        </div>
+        <div class="icon" on-click="_onEmptyClick">
+            <i class="fa fa-file-o"></i>
         </div>
         <div class="icon" on-click="_onBrowseClick">
             <i class="fa fa-dot-circle-o"></i>
