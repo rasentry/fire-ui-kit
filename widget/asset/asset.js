@@ -76,7 +76,7 @@ Editor.registerWidget( 'fire-asset', {
 
     _onClick: function ( event ) {
         event.stopPropagation();
-        Editor.sendToAll('editor:hint', this.value);
+        Editor.sendToAll('editor:hint-asset', this.value);
     },
 
     _onDropAreaEnter: function (event) {
