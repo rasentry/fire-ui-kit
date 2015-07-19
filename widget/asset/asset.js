@@ -47,7 +47,7 @@ Editor.registerWidget( 'fire-asset', {
         this._initFocusable(this);
         this._initDroppable(this.$.dropArea);
 
-        this._assetName = 'Unkown';
+        this._assetName = '';
     },
 
     _onDragOver: function (event) {
