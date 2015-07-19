@@ -1,0 +1,24 @@
+<dom-module id="fire-node">
+    <link rel="import" type="css" href="node.css">
+
+    <template>
+        <div id="dropArea" class="dropArea"
+            on-dragover="_onDragOver"
+        >
+            <div class="border">
+                <div class="fit content layout horizontal">
+                    <div class$="{{_nodeClass(value)}}">[[_nodeName]]</div>
+                    <span class="type">[[type]]</span>
+                </div>
+            </div>
+        </div>
+        <div class="icon" on-click="_onEmptyClick">
+            <i class="fa fa-file-o"></i>
+        </div>
+        <div class="icon" on-click="_onBrowseClick">
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+    </template>
+
+    <script type="text/javascript" src="node.js"></script>
+</dom-module>
