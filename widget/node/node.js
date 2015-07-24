@@ -87,7 +87,7 @@ Editor.registerWidget( 'fire-node', {
         // TODO
         // Editor.assetdb.queryInfoByUuid( dragItems[0], function ( info ) {
         //     this.highlighted = true;
-        //     if ( this.type !== info['meta-type'] ) {
+        //     if ( this.type !== info.type ) {
         //         this.invalid = true;
         //     }
         // }.bind(this));
