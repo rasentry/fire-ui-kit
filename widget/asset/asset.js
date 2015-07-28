@@ -20,7 +20,7 @@ Editor.registerWidget( 'fire-asset', {
     properties: {
         value: {
             type: String,
-            value: '',
+            value: undefined,
             notify: true,
             observer: '_valueChanged',
         },
