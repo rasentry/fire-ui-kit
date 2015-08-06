@@ -55,7 +55,6 @@
 
     white-space: nowrap;
     overflow: hidden;
-
 }
 
 .name {
@@ -69,16 +68,13 @@
 }
 
 .type {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-size: 12px;
+    text-align: right;
+
     color: #C8A002;
-}
-
-.type::before {
-    content: "[";
-}
-
-.type::after {
-    content: "]";
 }
 
 :host[focused] .dropArea{

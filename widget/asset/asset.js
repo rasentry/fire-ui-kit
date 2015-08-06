@@ -112,9 +112,9 @@ Editor.registerWidget( 'fire-asset', {
 
     _assetClass: function (value) {
         if (!value) {
-            return 'null name flex-1';
+            return 'null name flex-4';
         }
-        return 'name flex-1';
+        return 'name flex-4';
     },
 
     _valueChanged: function () {
