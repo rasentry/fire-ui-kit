@@ -5,8 +5,8 @@
   "author": "Firebox Technology",
   "build": true,
   "hosts": {
-    "editor-framework": "^0.3.12",
-    "engine-framework": "^0.1.0"
+    "editor-framework": "^0.3.14",
+    "engine-framework": "^0.1.1"
   },
   "main": "main.js",
   "menus": {
@@ -15,10 +15,10 @@
     }
   },
   "widgets": {
-      "fire-vec2": "widget/vec2/vec2.html",
-      "fire-color": "widget/color/color.html",
-      "fire-asset": "widget/asset/asset.html",
-      "fire-node": "widget/node/node.html"
+    "fire-vec2": "widget/vec2/vec2.html",
+    "fire-color": "widget/color/color.html",
+    "fire-asset": "widget/asset/asset.html",
+    "fire-node": "widget/node/node.html"
   },
   "panels": {
     "panel": {
@@ -27,12 +27,11 @@
       "title": "Fire UI Kit Preview",
       "width": 800,
       "height": 600,
-      "messages": [
-      ]
+      "messages": []
     }
   },
   "tests": [
-      "test/vec2.html",
-      "test/color.html"
+    "test/vec2.html",
+    "test/color.html"
   ]
 }
