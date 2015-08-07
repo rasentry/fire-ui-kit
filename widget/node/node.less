@@ -24,28 +24,6 @@
     flex: 1;
 }
 
-.icon {
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
-    font-size: 12px;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.icon:hover {
-    color: #F0F0F0;
-}
-
-.icon:active {
-    color: #616161;
-}
-
-.hilight {
-    background: #a70b0b;
-    border: 1px solid #d02323;
-}
-
 .content {
     color: #A5A5A5;
     display: block;
@@ -55,7 +33,6 @@
 
     white-space: nowrap;
     overflow: hidden;
-
 }
 
 .name {
@@ -68,17 +45,28 @@
     color: #525252;
 }
 
+.type-wrapper {
+    min-width: 30px;
+    margin-left: 5px;
+}
+
 .type {
-    font-size: 12px;
-    color: #C8A002;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    padding: 0px 3px;
+    border-radius: 1px;
+    font-size: 9px;
+    font-weight: bold;
+
+    color: #000;
+    background: #1FA135;
 }
 
-.type::before {
-    content: "[";
-}
-
-.type::after {
-    content: "]";
+.type:hover {
+    color: #ffffff;
+    background: #2376e4;
 }
 
 :host[focused] .dropArea{

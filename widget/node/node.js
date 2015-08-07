@@ -20,7 +20,7 @@ Editor.registerWidget( 'fire-node', {
     properties: {
         value: {
             type: String,
-            value: '',
+            value: undefined,
             notify: true,
             observer: '_valueChanged',
         },
@@ -113,9 +113,9 @@ Editor.registerWidget( 'fire-node', {
 
     _nodeClass: function (value) {
         if (!value) {
-            return 'null name flex-1';
+            return 'null name';
         }
-        return 'name flex-1';
+        return 'name';
     },
 
     _valueChanged: function () {
@@ -134,12 +134,6 @@ Editor.registerWidget( 'fire-node', {
         //     var Url = require('fire-url');
         //     this._assetName = Url.basenameNoExt(url);
         // }.bind(this));
-    },
-
-    _onEmptyClick: function (event) {
-        event.stopPropagation();
-
-        this.set( 'value', '' );
     },
 
     _onBrowseClick: function (event) {

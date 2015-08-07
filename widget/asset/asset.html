@@ -6,17 +6,13 @@
             on-dragover="_onDragOver"
         >
             <div class="border">
-                <div class="fit content layout horizontal">
+                <div class="fit content layout horizontal center-center">
                     <div class$="{{_assetClass(value)}}">[[_assetName]]</div>
-                    <span class="type self-end flex-1">[[type]]</span>
+                    <div class="type-wrapper flex-1 layout horizontal end-justified">
+                        <span class="type" on-click="_onBrowseClick">[[type]]</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="icon" on-click="_onEmptyClick">
-            <i class="fa fa-file-o"></i>
-        </div>
-        <div class="icon" on-click="_onBrowseClick">
-            <i class="fa fa-dot-circle-o"></i>
         </div>
     </template>
 

@@ -112,9 +112,9 @@ Editor.registerWidget( 'fire-asset', {
 
     _assetClass: function (value) {
         if (!value) {
-            return 'null name flex-4';
+            return 'null name';
         }
-        return 'name flex-4';
+        return 'name';
     },
 
     _valueChanged: function () {
@@ -132,12 +132,6 @@ Editor.registerWidget( 'fire-asset', {
             var Url = require('fire-url');
             this._assetName = Url.basenameNoExt(url);
         }.bind(this));
-    },
-
-    _onEmptyClick: function (event) {
-        event.stopPropagation();
-
-        this.set( 'value', '' );
     },
 
     _onBrowseClick: function (event) {
