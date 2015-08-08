@@ -84,7 +84,13 @@ Editor.registerWidget( 'fire-asset', {
 
         var dragItems = event.detail.dragItems;
 
-        Editor.assetdb.queryInfoByUuid( dragItems[0], function ( info ) {
+        if ( this._requestID ) {
+            Editor.cancelRequestToCore(this._requestID);
+            this._requestID = null;
+        }
+
+        this._requestID = Editor.assetdb.queryInfoByUuid( dragItems[0], function ( info ) {
+            this._requestID = null;
             this.highlighted = true;
             if ( this.type !== info.type ) {
                 this.invalid = true;
@@ -95,12 +101,22 @@ Editor.registerWidget( 'fire-asset', {
     _onDropAreaLeave: function (event) {
         event.stopPropagation();
 
+        if ( this._requestID ) {
+            Editor.cancelRequestToCore(this._requestID);
+            this._requestID = null;
+        }
+
         this.highlighted = false;
         this.invalid = false;
     },
 
     _onDropAreaAccept: function (event) {
         event.stopPropagation();
+
+        if ( this._requestID ) {
+            Editor.cancelRequestToCore(this._requestID);
+            this._requestID = null;
+        }
 
         this.highlighted = false;
         this.invalid = false;
