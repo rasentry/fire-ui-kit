@@ -64,13 +64,16 @@ Editor.registerWidget( 'fire-asset', {
         if ( this.highlighted ) {
             if ( !this.invalid ) {
                 EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'copy');
+                EditorUI.DragDrop.allowDrop( event.dataTransfer, true );
             }
             else {
                 EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
+                EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
             }
         }
         else {
             EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
+            EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
         }
     },
 

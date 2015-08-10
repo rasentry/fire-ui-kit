@@ -64,13 +64,16 @@ Editor.registerWidget( 'fire-node', {
         if ( this.highlighted ) {
             if ( !this.invalid ) {
                 EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'copy');
+                EditorUI.DragDrop.allowDrop( event.dataTransfer, true );
             }
             else {
                 EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
+                EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
             }
         }
         else {
             EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
+            EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
         }
     },
 
@@ -84,17 +87,30 @@ Editor.registerWidget( 'fire-node', {
 
         var dragItems = event.detail.dragItems;
 
-        // TODO
-        // Editor.assetdb.queryInfoByUuid( dragItems[0], function ( info ) {
-        //     this.highlighted = true;
-        //     if ( this.type !== info.type ) {
-        //         this.invalid = true;
-        //     }
-        // }.bind(this));
+        if ( this._requestID ) {
+            Editor.cancelWaitForReply(this._requestID);
+            this._requestID = null;
+        }
+
+        this._requestID = Editor.waitForReply(
+            'scene:query-node-info', dragItems[0], function ( info ) {
+            this._requestID = null;
+            this.highlighted = true;
+            if ( this.type === 'Runtime.NodeWrapper' || this.type === info.type ) {
+                this.invalid = false;
+            } else {
+                this.invalid = true;
+            }
+        }.bind(this));
     },
 
     _onDropAreaLeave: function (event) {
         event.stopPropagation();
+
+        if ( this._requestID ) {
+            Editor.cancelWaitForReply(this._requestID);
+            this._requestID = null;
+        }
 
         this.highlighted = false;
         this.invalid = false;
@@ -103,12 +119,26 @@ Editor.registerWidget( 'fire-node', {
     _onDropAreaAccept: function (event) {
         event.stopPropagation();
 
+        if ( this._requestID ) {
+            Editor.cancelRequestToCore(this._requestID);
+            this._requestID = null;
+        }
+
         this.highlighted = false;
         this.invalid = false;
 
         var dragItems = event.detail.dragItems;
         var uuid = dragItems[0];
         this.value = uuid;
+    },
+
+    _typeName: function (value) {
+        value = value.substring( value.lastIndexOf('.') + 1 );
+        var idx = value.indexOf('Wrapper');
+        if ( idx !== -1 ) {
+            value = value.substring( 0, idx );
+        }
+        return EditorUI.camelToDashCase(value).toLowerCase();
     },
 
     _nodeClass: function (value) {
@@ -124,16 +154,9 @@ Editor.registerWidget( 'fire-node', {
             return;
         }
 
-        // TODO
-        // if ( !Editor.assetdb ) {
-        //     this._assetName = 'Unkown';
-        //     return;
-        // }
-
-        // Editor.assetdb.queryUrlByUuid( this.value, function ( url ) {
-        //     var Url = require('fire-url');
-        //     this._assetName = Url.basenameNoExt(url);
-        // }.bind(this));
+        Editor.waitForReply( 'scene:query-node-info', this.value, function ( info ) {
+            this._nodeName = info.name;
+        }.bind(this));
     },
 
     _onBrowseClick: function (event) {
