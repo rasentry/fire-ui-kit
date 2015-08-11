@@ -79,7 +79,7 @@ Editor.registerWidget( 'fire-node', {
 
     _onClick: function ( event ) {
         event.stopPropagation();
-        Editor.sendToAll('editor:hint-node', this.value);
+        Editor.sendToAll('hierarchy:hint', this.value);
     },
 
     _onDropAreaEnter: function (event) {
@@ -154,9 +154,15 @@ Editor.registerWidget( 'fire-node', {
             return;
         }
 
-        Editor.waitForReply( 'scene:query-node-info', this.value, function ( info ) {
+        if ( this._requestID ) {
+            Editor.cancelWaitForReply(this._requestID);
+            this._requestID = null;
+        }
+
+        this._requestID = Editor.waitForReply( 'scene:query-node-info', this.value, function ( info ) {
+            this._requestID = null;
             this._nodeName = info.name;
-        }.bind(this));
+        }.bind(this), 500);
     },
 
     _onBrowseClick: function (event) {
