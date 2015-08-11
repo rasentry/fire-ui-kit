@@ -95,7 +95,9 @@ Editor.registerWidget( 'fire-asset', {
         this._requestID = Editor.assetdb.queryInfoByUuid( dragItems[0], function ( info ) {
             this._requestID = null;
             this.highlighted = true;
-            if ( this.type !== info.type ) {
+            if ( this.type === 'asset' || this.type === info.type ) {
+                this.invalid = false;
+            } else {
                 this.invalid = true;
             }
         }.bind(this));
