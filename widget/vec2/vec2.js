@@ -13,6 +13,13 @@ Editor.registerWidget( 'fire-vec2', {
         disabled: {
             type: Boolean,
             value: false,
+            reflectToAttribute: true,
+        },
+
+        readonly: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true,
         },
     },
 });
