@@ -88,12 +88,11 @@ Editor.registerWidget( 'fire-node', {
         var dragItems = event.detail.dragItems;
 
         if ( this._requestID ) {
-            Editor.cancelWaitForReply(this._requestID);
+            Editor.cancelWaitForReply('scene:query-node-info', this._requestID);
             this._requestID = null;
         }
 
-        this._requestID = Editor.waitForReply(
-            'scene:query-node-info', dragItems[0], function ( info ) {
+        this._requestID = Editor.waitForReply('scene:query-node-info', dragItems[0], function ( info ) {
             this._requestID = null;
             this.highlighted = true;
             if ( this.type === 'Runtime.NodeWrapper' || this.type === 'Runtime.DisplayObjectWrapper' || this.type === info.type ) {
@@ -108,7 +107,7 @@ Editor.registerWidget( 'fire-node', {
         event.stopPropagation();
 
         if ( this._requestID ) {
-            Editor.cancelWaitForReply(this._requestID);
+            Editor.cancelWaitForReply('scene:query-node-info', this._requestID);
             this._requestID = null;
         }
 
@@ -120,7 +119,7 @@ Editor.registerWidget( 'fire-node', {
         event.stopPropagation();
 
         if ( this._requestID ) {
-            Editor.cancelRequestToCore(this._requestID);
+            Editor.cancelWaitForReply('scene:query-node-info', this._requestID);
             this._requestID = null;
         }
 
