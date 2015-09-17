@@ -40,7 +40,7 @@ Editor.registerWidget( 'fire-node', {
             type: Boolean,
             value: false,
             reflectToAttribute: true,
-        }
+        },
     },
 
     ready: function () {
@@ -48,6 +48,7 @@ Editor.registerWidget( 'fire-node', {
         this._initDroppable(this.$.dropArea);
 
         this._nodeName = '';
+        this._missed = false;
     },
 
     _onDragOver: function (event) {
@@ -140,16 +141,22 @@ Editor.registerWidget( 'fire-node', {
         return EditorUI.camelToDashCase(value).toLowerCase();
     },
 
-    _nodeClass: function (value) {
-        if (!value) {
+    _nodeClass: function (value,_missed) {
+        if ( _missed ) {
+            return 'missed name';
+        }
+
+        if ( !value ) {
             return 'null name';
         }
+
         return 'name';
     },
 
     _valueChanged: function () {
         if ( !this.value ) {
             this._nodeName = 'None';
+            this._missed = false;
             return;
         }
 
@@ -161,6 +168,10 @@ Editor.registerWidget( 'fire-node', {
         this._requestID = Editor.waitForReply( 'scene:query-node-info', this.value, function ( info ) {
             this._requestID = null;
             this._nodeName = info.name;
+            this._missed = info.missed;
+            if ( info.missed ) {
+                this._nodeName = 'Missing Reference';
+            }
         }.bind(this), 500);
     },
 
