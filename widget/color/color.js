@@ -1,6 +1,4 @@
-Editor.registerWidget( 'fire-color', {
-    is: 'fire-color',
-
+Editor.registerElement({
     behaviors: [EditorUI.focusable],
 
     listeners: {

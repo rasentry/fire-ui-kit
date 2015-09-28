@@ -14,12 +14,6 @@
       "message": "fire-ui-kit:open"
     }
   },
-  "widgets": {
-    "fire-vec2": "widget/vec2/vec2.html",
-    "fire-color": "widget/color/color.html",
-    "fire-asset": "widget/asset/asset.html",
-    "fire-node": "widget/node/node.html"
-  },
   "panels": {
     "panel": {
       "frame": "panel/panel.html",

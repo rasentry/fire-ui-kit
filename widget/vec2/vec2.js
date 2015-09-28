@@ -1,6 +1,4 @@
-Editor.registerWidget( 'fire-vec2', {
-    is: 'fire-vec2',
-
+Editor.registerElement({
     properties: {
         value: {
             type: Object,

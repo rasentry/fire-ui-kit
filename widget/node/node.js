@@ -1,6 +1,4 @@
-Editor.registerWidget( 'fire-node', {
-    is: 'fire-node',
-
+Editor.registerElement({
     behaviors: [EditorUI.focusable,EditorUI.droppable],
 
     hostAttributes: {

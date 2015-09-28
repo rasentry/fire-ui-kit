@@ -1,6 +1,4 @@
-Editor.registerWidget( 'fire-asset', {
-    is: 'fire-asset',
-
+Editor.registerElement({
     behaviors: [EditorUI.focusable,EditorUI.droppable],
 
     hostAttributes: {
