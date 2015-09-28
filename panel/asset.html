@@ -1,10 +1,11 @@
 <dom-module id="fire-asset-preview">
-<style>
-    fire-asset {
-        margin: 5px;
-        width: 200px;
-    }
-</style>
+    <style>
+        fire-asset {
+            margin: 5px;
+            width: 200px;
+        }
+    </style>
+
     <template>
         <preview-item
             header="fire-asset"
@@ -21,19 +22,15 @@
         </preview-item>
 
     </template>
+
+    <script>
+        Editor.registerElement({
+            properties: {
+            },
+
+            _browse: function () {
+                console.log('browse');
+            },
+        });
+    </script>
 </dom-module>
-
-<script>
-Polymer( {
-    is: 'fire-asset-preview',
-
-    properties: {
-
-    },
-
-    _browse: function () {
-        console.log('browse');
-    },
-});
-
-</script>

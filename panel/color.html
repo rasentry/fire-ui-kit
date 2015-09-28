@@ -1,10 +1,11 @@
 <dom-module id="fire-color-preview">
-<style>
-    fire-color {
-        margin: 5px;
-        width: 200px;
-    }
-</style>
+    <style>
+        fire-color {
+            margin: 5px;
+            width: 200px;
+        }
+    </style>
+
     <template>
         <preview-item
             header="fire-color"
@@ -20,19 +21,15 @@
             <fire-color id="disabled" disabled></fire-color>
         </preview-item>
     </template>
+
+    <script>
+        Editor.registerElement({
+            properties: {
+            },
+
+            ready: function () {
+                this.$.disabled.value = new Fire.Color(255,0,0,0.5);
+            },
+        });
+    </script>
 </dom-module>
-
-<script>
-Polymer( {
-    is: 'fire-color-preview',
-
-    properties: {
-
-    },
-
-    ready: function () {
-        this.$.disabled.value = new Fire.Color(255,0,0,0.5);
-    },
-});
-
-</script>

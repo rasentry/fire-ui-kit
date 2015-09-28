@@ -35,31 +35,28 @@
             <fire-vec2 on-value-changed="_onValueChanged"></fire-vec2>
         </preview-item>
     </template>
+
+    <script>
+        Editor.registerElement({
+            properties: {
+                myValue1: {
+                    type: Object,
+                    value: function () {
+                        return new Fire.Vec2(1,2);
+                    },
+                },
+
+                myValue2: {
+                    type: Object,
+                    value: function () {
+                        return new Fire.Vec2(2,3);
+                    },
+                },
+            },
+
+            _onValueChanged: function (event) {
+                Editor.log(event.target.value);
+            },
+        });
+    </script>
 </dom-module>
-
-<script>
-Polymer( {
-    is: 'fire-vec2-preview',
-
-    properties: {
-        myValue1: {
-            type: Object,
-            value: function () {
-                return new Fire.Vec2(1,2);
-            },
-        },
-
-        myValue2: {
-            type: Object,
-            value: function () {
-                return new Fire.Vec2(2,3);
-            },
-        },
-    },
-
-    _onValueChanged: function (event) {
-        Editor.log(event.target.value);
-    },
-});
-
-</script>

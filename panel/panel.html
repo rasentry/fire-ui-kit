@@ -5,6 +5,7 @@
 <link rel="import" href="color.html">
 <link rel="import" href="asset.html">
 <link rel="import" href="node.html">
+
 <dom-module id="fire-ui-kit-preview">
     <style>
         :host {
@@ -34,31 +35,28 @@
             <fire-vec2-preview></fire-vec2-preview>
         </div>
     </template>
+
+    <script>
+        Editor.registerPanel( 'fire-ui-kit.panel', {
+            ready: function () {
+                // NOTE: add preview page here
+                this.previewPages = [
+                    { name: '<fire-vec2>', value: 'fire-vec2-preview' },
+                    { name: '<fire-color>', value: 'fire-color-preview' },
+                    { name: '<fire-asset>', value: 'fire-asset-preview' },
+                    { name: '<fire-node>', value: 'fire-node-preview' },
+                ];
+            },
+
+            _onSelect: function (event) {
+                var viewDOM = Polymer.dom(this.$.view);
+                viewDOM.removeChild(viewDOM.firstElementChild);
+
+                var selectEl = event.target.value;
+                var el = document.createElement(selectEl);
+                viewDOM.appendChild(el);
+            },
+
+        });
+    </script>
 </dom-module>
-
-<script>
-Editor.registerPanel( 'fire-ui-kit.panel', {
-    is: 'fire-ui-kit-preview',
-
-    ready: function () {
-        // NOTE: add preview page here
-        this.previewPages = [
-            { name: '<fire-vec2>', value: 'fire-vec2-preview' },
-            { name: '<fire-color>', value: 'fire-color-preview' },
-            { name: '<fire-asset>', value: 'fire-asset-preview' },
-            { name: '<fire-node>', value: 'fire-node-preview' },
-        ];
-    },
-
-    _onSelect: function (event) {
-        var viewDOM = Polymer.dom(this.$.view);
-        viewDOM.removeChild(viewDOM.firstElementChild);
-
-        var selectEl = event.target.value;
-        var el = document.createElement(selectEl);
-        viewDOM.appendChild(el);
-    },
-
-});
-
-</script>
