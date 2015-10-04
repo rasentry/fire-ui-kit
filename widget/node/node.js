@@ -136,7 +136,7 @@ Editor.registerElement({
         if ( idx !== -1 ) {
             value = value.substring( 0, idx );
         }
-        return EditorUI.camelToDashCase(value).toLowerCase();
+        return EditorUI.kebabCase(value);
     },
 
     _nodeClass: function (value,_missed) {
