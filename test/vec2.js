@@ -8,20 +8,20 @@ describe('<fire-vec2>', function() {
     });
 
     afterEach(function ( done ) {
-        vec2El.value = new Fire.Vec2(0,0);
+        vec2El.value = new cc.Vec2(0,0);
         done();
     });
 
     it('check default value', function( done ) {
-        expect(vec2El.value).to.be.eql(new Fire.Vec2(0,0));
+        expect(vec2El.value).to.be.eql(new cc.Vec2(0,0));
         done();
     });
 
     it('can be click "up" & "down" btn', function( done ) {
         Tester.click(vec2El.$.x.getElementsByClassName('btn')[0]);
-        expect(vec2El.value).to.be.eql(new Fire.Vec2(1,0));
+        expect(vec2El.value).to.be.eql(new cc.Vec2(1,0));
         Tester.click(vec2El.$.x.getElementsByClassName('btn')[1]);
-        expect(vec2El.value).to.be.eql(new Fire.Vec2(0,0));
+        expect(vec2El.value).to.be.eql(new cc.Vec2(0,0));
         done();
     });
 
@@ -33,7 +33,7 @@ describe('<fire-vec2>', function() {
     });
 
     it('can be set value ', function( done ) {
-        vec2El.value = new Fire.Vec2(77,88);
+        vec2El.value = new cc.Vec2(77,88);
         expect(vec2El.value.x).to.be.eql(77);
         expect(vec2El.value.y).to.be.eql(88);
         done();
@@ -51,8 +51,8 @@ describe('<fire-vec2 value="{{foo}}">', function() {
     });
 
     it('shoudl bind value to foo', function(done) {
-        scopeEL.foo = new Fire.Vec2(99,88);
-        expect(scopeEL.$.vec2.value).to.be.eql(new Fire.Vec2(99,88));
+        scopeEL.foo = new cc.Vec2(99,88);
+        expect(scopeEL.$.vec2.value).to.be.eql(new cc.Vec2(99,88));
         done();
     });
 

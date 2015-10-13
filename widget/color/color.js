@@ -81,8 +81,8 @@ Editor.registerElement({
             var value_ = event.target.value;
 
             var newValue;
-            if ( this.value instanceof Fire.Color ) {
-                newValue = new Fire.Color({
+            if ( this.value instanceof cc.Color ) {
+                newValue = new cc.Color({
                     r: value_.r/255,
                     g: value_.g/255,
                     b: value_.b/255,

@@ -16,7 +16,7 @@
 
         <preview-item
             header="fire-vec2 set value"
-            desc="Set value with 'new Fire.Vec2(x,y)'"
+            desc="Set value with 'new cc.Vec2(x,y)'"
         >
             <fire-vec2  value="{{myValue1}}"></fire-vec2>
         </preview-item>
@@ -42,14 +42,14 @@
                 myValue1: {
                     type: Object,
                     value: function () {
-                        return new Fire.Vec2(1,2);
+                        return new cc.Vec2(1,2);
                     },
                 },
 
                 myValue2: {
                     type: Object,
                     value: function () {
-                        return new Fire.Vec2(2,3);
+                        return new cc.Vec2(2,3);
                     },
                 },
             },

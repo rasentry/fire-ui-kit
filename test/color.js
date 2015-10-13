@@ -8,7 +8,7 @@ describe('<fire-color>', function() {
     });
 
     afterEach(function ( done ) {
-        colorEl.value = new Fire.Color(0,0,0,1);
+        colorEl.value = new cc.Color(0,0,0,1);
         done();
     });
 
@@ -18,8 +18,8 @@ describe('<fire-color>', function() {
     });
 
     it('can be set value', function( done ) {
-        colorEl.value = new Fire.Color(1,1,1,0.8);
-        expect(colorEl.value).to.be.eql(new Fire.Color(1,1,1,0.8));
+        colorEl.value = new cc.Color(1,1,1,0.8);
+        expect(colorEl.value).to.be.eql(new cc.Color(1,1,1,0.8));
         expect(colorEl.$.previewRGB.style.backgroundColor).to.be.eql('rgb(255, 255, 255)');
         expect(colorEl.$.alpha.style.width).to.be.eql('80%');
         done();
@@ -48,8 +48,8 @@ describe('<fire-color value="{{foo}}">', function() {
     });
 
     it('shoudl bind value to foo', function(done) {
-        scopeEL.foo = new Fire.Color(1,0,1,1);
-        expect(scopeEL.$.color.value).to.be.eql(new Fire.Color(1,0,1,1));
+        scopeEL.foo = new cc.Color(1,0,1,1);
+        expect(scopeEL.$.color.value).to.be.eql(new cc.Color(1,0,1,1));
         done();
     });
 

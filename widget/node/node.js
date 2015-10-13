@@ -94,7 +94,7 @@ Editor.registerElement({
         this._requestID = Editor.waitForReply('scene:query-node-info', dragItems[0], function ( info ) {
             this._requestID = null;
             this.highlighted = true;
-            if ( this.type === 'Runtime.NodeWrapper' || this.type === 'Runtime.DisplayObjectWrapper' || this.type === info.type ) {
+            if ( this.type === 'cc.NodeWrapper' || this.type === 'cc.DisplayObjectWrapper' || this.type === info.type ) {
                 this.invalid = false;
             } else {
                 this.invalid = true;
