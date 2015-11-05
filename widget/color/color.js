@@ -12,7 +12,7 @@ Editor.registerElement({
         value: {
             type: Object,
             value: function () {
-                return { r:1, g:1, b:1, a:1 };
+                return { r:255, g:255, b:255, a:255 };
             },
             notify: true,
         },
@@ -23,11 +23,11 @@ Editor.registerElement({
     },
 
     _backgroundStyle: function (r, g, b) {
-        return 'background-color:' + chroma(this.value.r * 255|0, this.value.g * 255|0, this.value.b * 255|0).css('rgb') + ';';
+        return 'background-color:' + chroma(this.value.r|0, this.value.g|0, this.value.b|0).css('rgb') + ';';
     },
 
     _alphaStyle: function (a) {
-        return 'width:' + (a / 1) * 100 + '%;';
+        return 'width:' + (a / 255) * 100 + '%;';
     },
 
     _onColorClick: function ( event ) {
@@ -72,9 +72,9 @@ Editor.registerElement({
 
         this._colorPicker = document.createElement('color-picker');
         this._colorPicker.setColor({
-            r: this.value.r * 255|0,
-            g: this.value.g * 255|0,
-            b: this.value.b * 255|0,
+            r: this.value.r|0,
+            g: this.value.g|0,
+            b: this.value.b|0,
             a: this.value.a
         });
         this._colorPicker.addEventListener( 'value-changed', function (event) {
@@ -83,17 +83,17 @@ Editor.registerElement({
             var newValue;
             if ( this.value instanceof cc.Color ) {
                 newValue = new cc.Color({
-                    r: value_.r/255,
-                    g: value_.g/255,
-                    b: value_.b/255,
+                    r: value_.r,
+                    g: value_.g,
+                    b: value_.b,
                     a: value_.a,
                 });
             }
             else {
                 newValue = {
-                    r: value_.r/255,
-                    g: value_.g/255,
-                    b: value_.b/255,
+                    r: value_.r,
+                    g: value_.g,
+                    b: value_.b,
                     a: value_.a,
                 };
             }
