@@ -1,28 +1,27 @@
 <link rel="import" href="packages://ui-kit/widget/unit-input/unit-input.html">
 
-<dom-module id="fire-vec2">
-    <link rel="import" type="css" href="vec2.css">
+<dom-module id="fire-size">
+    <link rel="import" type="css" href="size.css">
 
     <template>
-        <span></span>
-        <editor-unit-input id="x"
+        <editor-unit-input id="w"
             class="flex-1"
             disabled="{{disabled}}"
             readonly="{{readonly}}"
-            input-value="{{value.x}}"
-            hint="X"
+            input-value="{{value.width}}"
+            hint="W"
         >
         </editor-unit-input>
         <span class="space"></span>
-        <editor-unit-input id="y"
+        <editor-unit-input id="h"
             class="flex-1"
             disabled="{{disabled}}"
             readonly="{{readonly}}"
-            input-value="{{value.y}}"
-            hint="Y"
+            input-value="{{value.height}}"
+            hint="H"
         >
         </editor-unit-input>
     </template>
 
-    <script type="text/javascript" src="vec2.js"></script>
+    <script type="text/javascript" src="size.js"></script>
 </dom-module>
