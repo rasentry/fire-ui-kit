@@ -9,6 +9,12 @@ Editor.registerElement({
     },
 
     properties: {
+        noAlpha: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true,
+        },
+
         value: {
             type: Object,
             value: function () {
@@ -23,7 +29,7 @@ Editor.registerElement({
     },
 
     _backgroundStyle: function (r, g, b) {
-        return 'background-color:' + chroma(this.value.r|0, this.value.g|0, this.value.b|0).css('rgb') + ';';
+        return 'background-color:' + chroma(this.value.r | 0, this.value.g | 0, this.value.b | 0).css('rgb') + ';';
     },
 
     _alphaStyle: function (a) {
@@ -71,11 +77,12 @@ Editor.registerElement({
         }.bind(this));
 
         this._colorPicker = document.createElement('color-picker');
+        this._colorPicker.noAlpha = this.noAlpha;
         this._colorPicker.setColor({
-            r: this.value.r|0,
-            g: this.value.g|0,
-            b: this.value.b|0,
-            a: this.value.a
+            r: this.value.r | 0,
+            g: this.value.g | 0,
+            b: this.value.b | 0,
+            a: this.value.a | 0
         });
         this._colorPicker.addEventListener( 'value-changed', function (event) {
             var value_ = event.target.value;

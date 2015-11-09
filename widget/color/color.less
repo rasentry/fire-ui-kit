@@ -18,6 +18,21 @@
     background: @color-bg;
 }
 
+:host[no-alpha] {
+    #alpha {
+        display: none;
+    }
+    .rgb-wrapper {
+        height: 20px;
+    }
+    #previewRGB {
+        height: 20px;
+    }
+    #iconDown {
+        bottom: 5px;
+    }
+}
+
 .border {
     position: relative;
     border: 1px solid #000;
