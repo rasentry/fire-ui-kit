@@ -1,3 +1,5 @@
+'use strict';
+
 Editor.registerElement({
     behaviors: [EditorUI.focusable,EditorUI.droppable],
 
@@ -127,6 +129,10 @@ Editor.registerElement({
         var dragItems = event.detail.dragItems;
         var uuid = dragItems[0];
         this.value = uuid;
+
+        this.async(() => {
+          this.fire('end-editing');
+        },1);
     },
 
     _assetClass: function (value) {

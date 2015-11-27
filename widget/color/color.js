@@ -1,5 +1,5 @@
 (()=> {
-    'use strict'
+    'use strict';
     const Chroma = require('chroma-js');
 
     Editor.registerElement({
@@ -123,6 +123,10 @@
             }
             EditorUI.removeHitGhost();
             this.focus();
+
+            this.async(() => {
+              this.fire('end-editing');
+            },1);
         },
 
         _onFocusIn: function ( event ) {
@@ -148,8 +152,7 @@
 
                 if ( this._colorPicker ) {
                     this._closeColorPicker();
-                }
-                else {
+                } else {
                     this.setBlur();
                     EditorUI.focusParent(this);
                 }
