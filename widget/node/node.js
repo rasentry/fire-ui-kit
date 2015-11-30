@@ -96,11 +96,7 @@ Editor.registerElement({
         this._requestID = Editor.waitForReply('scene:query-node-info', dragItems[0], function ( info ) {
             this._requestID = null;
             this.highlighted = true;
-            if ( this.type === 'cc.NodeWrapper' || this.type === 'cc.DisplayObjectWrapper' || this.type === info.type ) {
-                this.invalid = false;
-            } else {
-                this.invalid = true;
-            }
+            this.invalid = !( this.type === 'node' || this.type === info.type );
         }.bind(this));
     },
 
@@ -137,12 +133,7 @@ Editor.registerElement({
     },
 
     _typeName: function (value) {
-        value = value.substring( value.lastIndexOf('.') + 1 );
-        var idx = value.indexOf('Wrapper');
-        if ( idx !== -1 ) {
-            value = value.substring( 0, idx );
-        }
-        return EditorUI.kebabCase(value);
+        return 'node';
     },
 
     _nodeClass: function (value,_missed) {
