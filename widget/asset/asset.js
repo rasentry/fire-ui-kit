@@ -128,7 +128,7 @@ Editor.registerElement({
 
         var dragItems = event.detail.dragItems;
         var uuid = dragItems[0];
-        this.value = uuid;
+        this.set('value', uuid);
 
         this.async(() => {
           this.fire('end-editing');
