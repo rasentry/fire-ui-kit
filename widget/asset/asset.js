@@ -100,9 +100,9 @@ Editor.registerElement({
             if ( info.type === this.type ) {
                 this.invalid = false;
             } else {
-                this.invalid = cc.isChildClassOf(
-                    cc.js._getClassId(Editor.assets[info.type]),
-                    cc.js._getClassId(Editor.assets[this.type])
+                this.invalid = !cc.isChildClassOf(
+                    Editor.assets[info.type],
+                    Editor.assets[this.type]
                 );
             }
         });
