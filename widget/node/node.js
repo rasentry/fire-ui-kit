@@ -96,7 +96,12 @@ Editor.registerElement({
         this._requestID = Editor.waitForReply('scene:query-node-info', dragItems[0], function ( info ) {
             this._requestID = null;
             this.highlighted = true;
-            this.invalid = !( this.type === 'node' || this.type === info.type );
+            if ( this.type === info.type ) {
+                this.invalid = false;
+            } else {
+                // TODO
+                // this.invalid = !(info.type === this.type || this.extends.indexOf(info.type) !== -1);
+            }
         }.bind(this));
     },
 
@@ -130,10 +135,6 @@ Editor.registerElement({
         this.async(() => {
           this.fire('end-editing');
         },1);
-    },
-
-    _typeName: function (value) {
-        return 'node';
     },
 
     _nodeClass: function (value,_missed) {

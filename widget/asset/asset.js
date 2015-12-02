@@ -92,15 +92,20 @@ Editor.registerElement({
             this._requestID = null;
         }
 
-        this._requestID = Editor.assetdb.queryInfoByUuid( dragItems[0], function ( info ) {
+        this._requestID = Editor.assetdb.queryInfoByUuid( dragItems[0], info => {
             this._requestID = null;
             this.highlighted = true;
-            if ( this.type === 'asset' || this.type === 'raw-asset' || this.type === info.type ) {
+            this.invalid = true;
+
+            if ( info.type === this.type ) {
                 this.invalid = false;
             } else {
-                this.invalid = true;
+                this.invalid = cc.isChildClassOf(
+                    cc.js._getClassId(Editor.assets[info.type]),
+                    cc.js._getClassId(Editor.assets[this.type])
+                );
             }
-        }.bind(this));
+        });
     },
 
     _onDropAreaLeave: function (event) {
