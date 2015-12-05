@@ -1,3 +1,5 @@
+'use strict';
+
 Editor.registerElement({
     behaviors: [EditorUI.focusable,EditorUI.droppable],
 
@@ -90,15 +92,20 @@ Editor.registerElement({
             this._requestID = null;
         }
 
-        this._requestID = Editor.assetdb.queryInfoByUuid( dragItems[0], function ( info ) {
+        this._requestID = Editor.assetdb.queryInfoByUuid( dragItems[0], info => {
             this._requestID = null;
             this.highlighted = true;
-            if ( this.type === 'asset' || this.type === 'raw-asset' || this.type === info.type ) {
+            this.invalid = true;
+
+            if ( info.type === this.type ) {
                 this.invalid = false;
             } else {
-                this.invalid = true;
+                this.invalid = !cc.isChildClassOf(
+                    Editor.assets[info.type],
+                    Editor.assets[this.type]
+                );
             }
-        }.bind(this));
+        });
     },
 
     _onDropAreaLeave: function (event) {
@@ -126,7 +133,11 @@ Editor.registerElement({
 
         var dragItems = event.detail.dragItems;
         var uuid = dragItems[0];
-        this.value = uuid;
+        this.set('value', uuid);
+
+        this.async(() => {
+          this.fire('end-editing');
+        },1);
     },
 
     _assetClass: function (value) {

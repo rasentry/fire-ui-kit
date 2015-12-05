@@ -1,3 +1,5 @@
+'use strict';
+
 Editor.registerElement({
     behaviors: [EditorUI.focusable,EditorUI.droppable],
 
@@ -94,10 +96,11 @@ Editor.registerElement({
         this._requestID = Editor.waitForReply('scene:query-node-info', dragItems[0], function ( info ) {
             this._requestID = null;
             this.highlighted = true;
-            if ( this.type === 'cc.NodeWrapper' || this.type === 'cc.DisplayObjectWrapper' || this.type === info.type ) {
+            if ( this.type === info.type ) {
                 this.invalid = false;
             } else {
-                this.invalid = true;
+                // TODO
+                // this.invalid = !(info.type === this.type || this.extends.indexOf(info.type) !== -1);
             }
         }.bind(this));
     },
@@ -127,16 +130,11 @@ Editor.registerElement({
 
         var dragItems = event.detail.dragItems;
         var uuid = dragItems[0];
-        this.value = uuid;
-    },
+        this.set('value', uuid);
 
-    _typeName: function (value) {
-        value = value.substring( value.lastIndexOf('.') + 1 );
-        var idx = value.indexOf('Wrapper');
-        if ( idx !== -1 ) {
-            value = value.substring( 0, idx );
-        }
-        return EditorUI.kebabCase(value);
+        this.async(() => {
+          this.fire('end-editing');
+        },1);
     },
 
     _nodeClass: function (value,_missed) {
