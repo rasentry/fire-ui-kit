@@ -25,7 +25,12 @@ Editor.registerElement({
       observer: '_valueChanged',
     },
 
-    type: {
+    typeid: {
+      type: String,
+      value: 'Unkown'
+    },
+
+    typename: {
       type: String,
       value: 'Unkown'
     },
@@ -97,11 +102,11 @@ Editor.registerElement({
     this._requestID = Editor.waitForReply(
       'scene:query-node-info',
       dragItems[0],
-      this.type,
+      this.typeid,
       info => {
         this._requestID = null;
         this.highlighted = true;
-        if ( this.type !== 'cc.Node' ) {
+        if ( this.typeid !== 'cc.Node' ) {
           this.invalid = !info.compID;
         } else {
           this.invalid = false;
@@ -137,7 +142,7 @@ Editor.registerElement({
 
     let dragItems = event.detail.dragItems;
     let uuid = dragItems[0];
-    if ( this.type !== 'cc.Node' ) {
+    if ( this.typeid !== 'cc.Node' ) {
       uuid = this._compID;
     }
 
@@ -179,7 +184,7 @@ Editor.registerElement({
     this._requestID = Editor.waitForReply(
       'scene:query-node-info',
       this.value,
-      this.type,
+      this.typeid,
       info => {
         this._requestID = null;
         this._nodeName = info.name;
