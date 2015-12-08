@@ -111,8 +111,8 @@ Editor.registerElement({
         } else {
           this.invalid = false;
         }
-        this._nodeID = info.nodeID;
-        this._compID = info.compID;
+        this._cacheNodeID = info.nodeID;
+        this._cacheCompID = info.compID;
       }
     );
   },
@@ -143,8 +143,11 @@ Editor.registerElement({
     let dragItems = event.detail.dragItems;
     let uuid = dragItems[0];
     if ( this.typeid !== 'cc.Node' ) {
-      uuid = this._compID;
+      uuid = this._cacheCompID;
     }
+
+    this._compID = this._cacheCompID;
+    this._nodeID = this._cacheNodeID;
 
     this.set('value', uuid);
     if ( !uuid ) {
