@@ -27,12 +27,12 @@ Editor.registerElement({
 
     typeid: {
       type: String,
-      value: 'Unkown'
+      value: 'Unknown'
     },
 
     typename: {
       type: String,
-      value: 'Unkown'
+      value: 'Unknown'
     },
 
     highlighted: {
