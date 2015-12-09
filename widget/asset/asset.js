@@ -47,7 +47,7 @@ Editor.registerElement({
     this._initFocusable(this);
     this._initDroppable(this.$.dropArea);
 
-    this._assetName = '';
+    this._assetName = 'None';
   },
 
   _isTypeValid ( type ) {
