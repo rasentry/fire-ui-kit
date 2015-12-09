@@ -1,20 +1,20 @@
 <dom-module id="fire-asset">
-    <link rel="import" type="css" href="asset.css">
+  <link rel="import" type="css" href="asset.css">
 
-    <template>
-        <div id="dropArea" class="dropArea"
-            on-dragover="_onDragOver"
-        >
-            <div class="border">
-                <div class="fit content layout horizontal center-center">
-                    <div class$="{{_assetClass(value)}}">[[_assetName]]</div>
-                    <div class="type-wrapper flex-1 layout horizontal end-justified">
-                        <span class="type" on-click="_onBrowseClick">[[type]]</span>
-                    </div>
-                </div>
-            </div>
+  <template>
+    <div id="dropArea" class="dropArea"
+      on-dragover="_onDragOver"
+    >
+      <div class="border">
+        <div class="fit content layout horizontal center-center">
+          <div class$="{{_assetClass(value)}}">[[_assetName]]</div>
+          <div class="type-wrapper flex-1 layout horizontal end-justified">
+            <span class="type" on-click="_onBrowseClick">[[type]]</span>
+          </div>
         </div>
-    </template>
+      </div>
+    </div>
+  </template>
 
-    <script type="text/javascript" src="asset.js"></script>
+  <script type="text/javascript" src="asset.js"></script>
 </dom-module>
