@@ -1,171 +1,196 @@
 'use strict';
 
 Editor.registerElement({
-    behaviors: [EditorUI.focusable,EditorUI.droppable],
+  behaviors: [EditorUI.focusable,EditorUI.droppable],
 
-    hostAttributes: {
-        'droppable': 'asset',
-        'single-drop': true,
+  hostAttributes: {
+    'droppable': 'asset',
+    'single-drop': true,
+  },
+
+  listeners: {
+    'focus': '_onFocus',
+    'blur': '_onBlur',
+    'click': '_onClick',
+    'drop-area-enter': '_onDropAreaEnter',
+    'drop-area-leave': '_onDropAreaLeave',
+    'drop-area-accept': '_onDropAreaAccept',
+  },
+
+  properties: {
+    value: {
+      type: String,
+      value: null,
+      notify: true,
+      observer: '_valueChanged',
     },
 
-    listeners: {
-        'focus': '_onFocus',
-        'blur': '_onBlur',
-        'click': '_onClick',
-        'drop-area-enter': '_onDropAreaEnter',
-        'drop-area-leave': '_onDropAreaLeave',
-        'drop-area-accept': '_onDropAreaAccept',
+    type: {
+      type: String,
+      value: 'Unknown'
     },
 
-    properties: {
-        value: {
-            type: String,
-            value: undefined,
-            notify: true,
-            observer: '_valueChanged',
-        },
-
-        type: {
-            type: String,
-            value: 'Unkown'
-        },
-
-        highlighted: {
-            type: Boolean,
-            value: false,
-            reflectToAttribute: true,
-        },
-
-        invalid: {
-            type: Boolean,
-            value: false,
-            reflectToAttribute: true,
-        }
+    highlighted: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true,
     },
 
-    ready: function () {
-        this._initFocusable(this);
-        this._initDroppable(this.$.dropArea);
+    invalid: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true,
+    }
+  },
 
-        this._assetName = '';
-    },
+  ready () {
+    this._initFocusable(this);
+    this._initDroppable(this.$.dropArea);
 
-    _onDragOver: function (event) {
-        var dragType = EditorUI.DragDrop.type(event.dataTransfer);
-        if ( dragType !== 'asset' ) {
-            EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
-            return;
-        }
+    this._assetName = '';
+  },
 
-        event.preventDefault();
-        event.stopPropagation();
+  _isTypeValid ( type ) {
+    if ( type === this.type ) {
+      return true;
+    }
+    return cc.isChildClassOf(
+      Editor.assets[type],
+      Editor.assets[this.type]
+    );
+  },
 
-        //
-        if ( this.highlighted ) {
-            if ( !this.invalid ) {
-                EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'copy');
-                EditorUI.DragDrop.allowDrop( event.dataTransfer, true );
-            }
-            else {
-                EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
-                EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
-            }
-        }
-        else {
-            EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
-            EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
-        }
-    },
+  _onDragOver (event) {
+    let dragType = EditorUI.DragDrop.type(event.dataTransfer);
+    if ( dragType !== 'asset' ) {
+      EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
+      return;
+    }
 
-    _onClick: function ( event ) {
-        event.stopPropagation();
-        Editor.sendToAll('assets:hint', this.value);
-    },
+    event.preventDefault();
+    event.stopPropagation();
 
-    _onDropAreaEnter: function (event) {
-        event.stopPropagation();
+    //
+    if ( this.highlighted ) {
+      if ( !this.invalid ) {
+        EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'copy');
+        EditorUI.DragDrop.allowDrop( event.dataTransfer, true );
+      }
+      else {
+        EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
+        EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
+      }
+    }
+    else {
+      EditorUI.DragDrop.updateDropEffect(event.dataTransfer, 'none');
+      EditorUI.DragDrop.allowDrop( event.dataTransfer, false );
+    }
+  },
 
-        var dragItems = event.detail.dragItems;
+  _onClick ( event ) {
+    event.stopPropagation();
+    Editor.sendToAll('assets:hint', this.value);
+  },
 
-        if ( this._requestID ) {
-            Editor.cancelRequestToCore(this._requestID);
-            this._requestID = null;
-        }
+  _onDropAreaEnter (event) {
+    event.stopPropagation();
 
-        this._requestID = Editor.assetdb.queryInfoByUuid( dragItems[0], info => {
-            this._requestID = null;
-            this.highlighted = true;
-            this.invalid = true;
+    let dragItems = event.detail.dragItems;
 
-            if ( info.type === this.type ) {
-                this.invalid = false;
-            } else {
-                this.invalid = !cc.isChildClassOf(
-                    Editor.assets[info.type],
-                    Editor.assets[this.type]
-                );
-            }
-        });
-    },
+    if ( this._requestID ) {
+      Editor.cancelRequestToCore(this._requestID);
+      this._requestID = null;
+    }
 
-    _onDropAreaLeave: function (event) {
-        event.stopPropagation();
+    let uuid = dragItems[0];
+    this.invalid = true;
 
-        if ( this._requestID ) {
-            Editor.cancelRequestToCore(this._requestID);
-            this._requestID = null;
-        }
+    this._requestID = Editor.assetdb.queryMetaInfoByUuid(uuid, metaInfo => {
+      this._requestID = null;
+      this.highlighted = true;
 
-        this.highlighted = false;
-        this.invalid = false;
-    },
+      this._cacheUuid = uuid;
+      this.invalid = !this._isTypeValid(metaInfo.assetType);
+      if ( !this.invalid ) {
+        return;
+      }
 
-    _onDropAreaAccept: function (event) {
-        event.stopPropagation();
+      //
+      let meta = JSON.parse(metaInfo.json);
+      let keys = Object.keys(meta.subMetas);
+      if ( keys.length !== 1 ) {
+        return;
+      }
 
-        if ( this._requestID ) {
-            Editor.cancelRequestToCore(this._requestID);
-            this._requestID = null;
-        }
+      //
+      let subMetaUuid = meta.subMetas[keys[0]].uuid;
+      this._requestID = Editor.assetdb.queryInfoByUuid( subMetaUuid, info => {
+        this._cacheUuid = subMetaUuid;
+        this.invalid = !this._isTypeValid(info.type);
+      });
+    });
+  },
 
-        this.highlighted = false;
-        this.invalid = false;
+  _onDropAreaLeave (event) {
+    event.stopPropagation();
 
-        var dragItems = event.detail.dragItems;
-        var uuid = dragItems[0];
-        this.set('value', uuid);
+    if ( this._requestID ) {
+      Editor.cancelRequestToCore(this._requestID);
+      this._requestID = null;
+    }
 
-        this.async(() => {
-          this.fire('end-editing');
-        },1);
-    },
+    this.highlighted = false;
+    this.invalid = false;
+  },
 
-    _assetClass: function (value) {
-        if (!value) {
-            return 'null name';
-        }
-        return 'name';
-    },
+  _onDropAreaAccept (event) {
+    event.stopPropagation();
 
-    _valueChanged: function () {
-        if ( !this.value ) {
-            this._assetName = 'None';
-            return;
-        }
+    if ( this._requestID ) {
+      Editor.cancelRequestToCore(this._requestID);
+      this._requestID = null;
+    }
 
-        if ( !Editor.assetdb ) {
-            this._assetName = 'Unkown';
-            return;
-        }
+    this.highlighted = false;
+    this.invalid = false;
 
-        Editor.assetdb.queryUrlByUuid( this.value, function ( url ) {
-            var Url = require('fire-url');
-            this._assetName = Url.basenameNoExt(url);
-        }.bind(this));
-    },
+    let uuid = this._cacheUuid;
+    this.set('value', uuid);
+    if ( !uuid ) {
+      this._assetName = 'None';
+    }
 
-    _onBrowseClick: function (event) {
-        event.stopPropagation();
-        Editor.info('TODO');
-    },
+    this.async(() => {
+      this.fire('end-editing');
+    },1);
+  },
+
+  _assetClass (value) {
+    if (!value) {
+      return 'null name';
+    }
+    return 'name';
+  },
+
+  _valueChanged () {
+    if ( !this.value ) {
+      this._assetName = 'None';
+      return;
+    }
+
+    if ( !Editor.assetdb ) {
+      this._assetName = 'Unkown';
+      return;
+    }
+
+    Editor.assetdb.queryUrlByUuid( this.value, url => {
+      const Url = require('fire-url');
+      this._assetName = Url.basenameNoExt(url);
+    });
+  },
+
+  _onBrowseClick (event) {
+    event.stopPropagation();
+    Editor.info('TODO');
+  },
 });
